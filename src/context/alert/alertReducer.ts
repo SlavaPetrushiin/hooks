@@ -1,6 +1,7 @@
 import {HIDE_ALERT, SHOW_ALERT} from "../types";
+import {AlertActionTypes} from "../alert";
 
-export const alertReducer = (state: any, action: any) => {
+export const alertReducer = (state: any, action: AlertActionTypes) => {
     switch (action.type) {
         case SHOW_ALERT:
             return action.payload;
