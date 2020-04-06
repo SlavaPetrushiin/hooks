@@ -4,7 +4,6 @@ import {CLEAR_USERS, GET_REPOS, GET_USER, SEARCH_USERS, SET_LOADING} from "../ty
 export const githubReducer = (state: IInitialState, action: any) => {
     switch (action.type) {
         case SEARCH_USERS:
-            debugger
             return {
                 ...state,
                 users: action.payload,

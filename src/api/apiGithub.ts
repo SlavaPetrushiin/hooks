@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {IUser} from "../context/github/GitHubState";
+import {IUser, IUserProfile} from "../context/github/GitHubState";
 
 
 
@@ -18,8 +18,14 @@ export const apiGithub = {
                 return response.data.items;
             })
     },
-    getUser(name: string): Promise<IUser> {
-        return axios.get<any>(withCred(`https://api.github.com/users/${name}?`))
+    getUser(name: string): Promise<IUserProfile> {
+        return axios.get<IUserProfile>(withCred(`https://api.github.com/users/${name}?`))
+            .then(response => {
+                return response.data;
+            })
+    },
+    getRepos(name: string): Promise<any> {
+        return axios.get<any>(withCred(`https://api.github.com/users/${name}/repos?per_page=5&`))
             .then(response => {
                 debugger
                 return response.data;

@@ -4,8 +4,8 @@ import GitHubContext, {IGitHubContext} from "../context/github/GitHubContext";
 
 const Search = (props: {}) => {
     const [value, setValue] = useState<string>('');
-    const {show} = useContext(AlertContext) as AlertContextInterface;
-    const {searchUsers} = useContext(GitHubContext) as IGitHubContext;
+    const {show, hide} = useContext(AlertContext) as AlertContextInterface;
+    const {searchUsers, clearUsers} = useContext(GitHubContext) as IGitHubContext;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.currentTarget.value);
@@ -14,11 +14,14 @@ const Search = (props: {}) => {
     const handleSubmit = (e:  React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key !== 'Enter') return;
 
+        clearUsers();
+
         if(value.trim()){
             searchUsers(value.trim());
+            hide();
         } else {
             if(show) {
-                show('Введите данные пользователя!')
+                show('Введите данные пользователя!');
             }
         }
     };
