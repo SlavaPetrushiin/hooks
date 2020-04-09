@@ -1,4 +1,5 @@
 import React from 'react';
+import {IRepo, IUser, IUserProfile} from "./GitHubState";
 
 export interface IGitHubContext {
     searchUsers: (value: string) => void;
@@ -6,10 +7,10 @@ export interface IGitHubContext {
     getUser: (name: string) => void;
     setLoading: () => void;
     clearUsers: () => void;
-    user: {};
-    users: []
-    loading: boolean
-    repos: []
+    user: {} |IUser | IUserProfile;
+    users: [] | IUser[];
+    loading: boolean;
+    repos: [] | IRepo[];
 }
 
 const  GitHubContext = React.createContext<IGitHubContext | null>(null);

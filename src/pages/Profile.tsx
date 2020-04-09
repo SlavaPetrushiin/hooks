@@ -2,17 +2,19 @@ import React, {useContext, useEffect, Fragment} from 'react';
 import GitHubContext, {IGitHubContext} from "../context/github/GitHubContext";
 import {withRouter, Link} from 'react-router-dom';
 import {IUserProfile} from "../context/github/GitHubState";
+import Loader from "../component/Loader";
+import Repos from "../component/Repos";
 
 
 const Profile = (props: any) => {
     const {getUser, getRepos, loading, user, repos} = useContext(GitHubContext) as IGitHubContext;
     useEffect(() => {
         getUser(props.match.params.name);
-        // getRepos(props.match.params.name);
+        getRepos(props.match.params.name);
     }, []);
 
     if (loading) {
-        return <p className="text-center">Загрузка...</p>
+        return <Loader/>
     }
 
     const {
@@ -74,7 +76,7 @@ const Profile = (props: any) => {
                 </div>
             </div>
 
-            {/*{repos.join()}*/}
+            <Repos repos={repos}/>
         </Fragment>
     )
 };

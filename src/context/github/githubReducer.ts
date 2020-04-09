@@ -1,7 +1,8 @@
 import {IInitialState} from "./GitHubState";
 import {CLEAR_USERS, GET_REPOS, GET_USER, SEARCH_USERS, SET_LOADING} from "../types";
+import {GithubActionTypes} from "../github";
 
-export const githubReducer = (state: IInitialState, action: any) => {
+export const githubReducer = (state: IInitialState, action: GithubActionTypes) => {
     switch (action.type) {
         case SEARCH_USERS:
             return {

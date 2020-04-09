@@ -6,9 +6,8 @@ import GitHubContext, {IGitHubContext} from "../context/github/GitHubContext";
 import Loader from "../component/Loader";
 import {IUser} from "../context/github/GitHubState";
 
-
-const Home = (props: {}) => {
-    const {users, loading, getUser} = useContext(GitHubContext) as IGitHubContext;
+const Home = (props: any) => {
+    const {users, loading} = useContext(GitHubContext) as IGitHubContext;
 
     return (
         <React.Fragment>
