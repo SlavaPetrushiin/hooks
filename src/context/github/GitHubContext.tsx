@@ -7,10 +7,10 @@ export interface IGitHubContext {
     getUser: (name: string) => void;
     setLoading: () => void;
     clearUsers: () => void;
-    user: {} |IUser | IUserProfile;
-    users: [] | IUser[];
+    user: IUser | IUserProfile;
+    users: IUser[];
     loading: boolean;
-    repos: [] | IRepo[];
+    repos: IRepo[];
 }
 
 const  GitHubContext = React.createContext<IGitHubContext | null>(null);

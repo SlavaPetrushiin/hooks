@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import AlertContext from "./AlertContext";
 import {alertReducer} from "./alertReducer";
-import {hideAC, showAC} from "../alert";
+import {actionsAlert} from "../alert";
 
 interface IProps {
     children: React.ReactNode
@@ -10,8 +10,8 @@ interface IProps {
 export const AlertState = (props: IProps) => {
     const [state, dispatch] = useReducer(alertReducer, null);
 
-    const hide = () => dispatch(hideAC());
-    const show = (text: string, type: string = 'secondary') => dispatch(showAC(text, type));
+    const hide = () => dispatch(actionsAlert.hideAC());
+    const show = (text: string, type: string = 'secondary') => dispatch(actionsAlert.showAC(text, type));
 
     return (
         <AlertContext.Provider value={{

@@ -1,8 +1,7 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 
-interface IProps {
-}
+interface IProps {}
 
 const Navbar = (props: IProps) => {
     return (

@@ -1,24 +1,8 @@
-import {HIDE_ALERT, SHOW_ALERT} from "./types";
+import {InferActionsTypes} from "./types";
 
-interface IHideAC  {
-    type: typeof HIDE_ALERT;
-}
+export type AlertActionTypes = InferActionsTypes<typeof actionsAlert>;
 
-interface IShowAC  {
-    type: typeof SHOW_ALERT;
-    payload: IAlertPayload
-}
-
-interface IAlertPayload {
-    text: string;
-    type: string;
-}
-
-export type AlertActionTypes = IHideAC | IShowAC;
-
-//actionCreator
-export const hideAC = (): IHideAC => ({type: HIDE_ALERT});
-export const showAC = (text: string, type: string): IShowAC => ({
-    type: SHOW_ALERT,
-    payload: {text, type}
-});
+export const actionsAlert = {
+    hideAC: () => ({type: 'HIDE_ALERT'} as const),
+    showAC : (text: string, type: string) => ({type: 'SHOW_ALERT', payload: {text, type}} as const),
+};

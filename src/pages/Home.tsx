@@ -6,16 +6,17 @@ import GitHubContext, {IGitHubContext} from "../context/github/GitHubContext";
 import Loader from "../component/Loader";
 import {IUser} from "../context/github/GitHubState";
 
-const Home = (props: any) => {
+const Home = () => {
     const {users, loading} = useContext(GitHubContext) as IGitHubContext;
-
+debugger
     return (
         <React.Fragment>
             <Search/>
 
             <div className={'row'}>
                 {loading &&  <Loader/>}
-                { users.length === 0
+                {
+                    users.length === 0
                     ? <p className={'text-center'}>Список пуст</p>
                     : users.map((user: IUser) => {
                         return (

@@ -2,7 +2,7 @@ import React, {useReducer} from 'react';
 import GitHubContext from "./GitHubContext";
 import {githubReducer} from "./githubReducer";
 import {apiGithub} from "../../api/apiGithub";
-import {clearUsersAC, getUserAC, searchUsersAC, setLoadingAC, getReposAC} from "../github";
+import {actionsGit} from "../github";
 
 interface IProps {
     children: React.ReactNode;
@@ -140,44 +140,41 @@ export interface IRepo {
     default_branch: string;
 }
 
-export type IInitialState = {
-    user: {} |IUser | IUserProfile;
-    users: [] | IUser[];
-    loading: boolean;
-    repos: [] | IRepo[];
-}
+const initialState = {
+    user: {} as IUser | IUserProfile,
+    users: [] as IUser[],
+    loading: false,
+    repos: [] as IRepo[]
+};
+export  type IState = typeof initialState
 
 export const GitHubState = (props: IProps) => {
-    const initialState: IInitialState = {
-        user: {},
-        users: [],
-        loading: false,
-        repos: []
-    };
+
     const [state, dispatch] = useReducer(githubReducer, initialState);
 
     const searchUsers = async (value: string) => {
         setLoading();
         const users = await apiGithub.searchUsers(value);
-        dispatch(searchUsersAC(users));
+        const p = users as IUser[];
+        dispatch(actionsGit.searchUsersAC(p));
     };
 
     const getRepos = async (name: string) => {
         setLoading();
         const repos = await apiGithub.getRepos(name);
-        dispatch(getReposAC(repos))
+        dispatch(actionsGit.getReposAC(repos))
     };
 
     const getUser = async (name: string) => {
         setLoading();
         const userProfile = await apiGithub.getUser(name);
-        dispatch(getUserAC(userProfile));
+        dispatch(actionsGit.getUserAC(userProfile));
     };
 
     const {user, users, loading, repos} = state;
 
-    const setLoading = () => dispatch(setLoadingAC());
-    const clearUsers = () => dispatch(clearUsersAC());
+    const setLoading = () => dispatch(actionsGit.setLoadingAC());
+    const clearUsers = () => dispatch(actionsGit.clearUsersAC());
 
     return (
         <GitHubContext.Provider value={{
